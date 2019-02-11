@@ -1,0 +1,77 @@
+
+<div class="container theme-showcase" role="main">
+
+	<div class="page-header">
+		<h3>Here is your TODO List</h3>
+	</div>
+
+
+
+	<div>
+
+
+
+		<table class="table table-striped">
+			<thead>
+				<tr ng-if="taskList.length > 0">
+					<th>S.No</th>
+					<th>Task Name</th>
+					<th>Task Description</th>
+					<th>Update Date</th>
+					<th>Checked/UnChecked</th>
+
+
+				</tr>
+			</thead>
+
+			<tr ng-repeat="task in taskList|orderBy : '-lastUpdatedDate' ">
+
+				<td>{{ $index+1 }}</td>
+				<td>{{task.taskName}}</td>
+				<td>{{task.taskDescription}}</td>
+				<td>{{task.lastUpdatedDate}}</td>
+				<td><input type="checkbox" ng-model="task.taskStatus"
+					ng-change="updateTaskStatus(task)" class="form-control col-sm-2"
+					style="width: 20%;"></td>
+				<td>
+					<button id="removeBtn" type="button"
+						class="btn btn btn-danger col-sm-1" style="width: auto"
+						; font-weight:bold;" ng-click="removeTask(task)">Remove
+						Task</button>
+				</td>
+
+
+			</tr>
+
+
+		</table>
+	</div>
+	<div class="page-header">
+		<h3>Add Task Here</h3>
+	</div>
+	<form name="addForm" autocomplete="off" novalidate>
+		<div class="form-group row">
+			<label for="taskName" class="col-sm-1">Task Name :</label> <input
+				type="text" class="form-control col-sm-2" style="width: auto;"
+				placeholder="Task Name" name="taskName" id="taskName"
+				data-validation="length alphanumeric" ng-model="taskModel.taskName"
+				required /> <label for="taskDescription" class="col-sm-1">Task
+				Description:</label> <input type="text" class="form-control col-sm-2"
+				style="width: auto;" placeholder="Task Description"
+				name="taskDescription" id="taskDescription"
+				data-validation="length alphanumeric"
+				ng-model="taskModel.taskDescription" required /> 
+				<label for="checked" class="col-sm-1"">Checked </label> <input
+				type="checkbox" ng-model="taskModel.taskStatus"
+				class="form-control col-sm-1" style="width: 20%;"/>
+	
+		
+			<button id="addBtn" type="button"
+				class="btn btn btn-primary col-sm-1" style="width: auto"
+				; font-weight:bold;" ng-disabled="addForm.$invalid"
+				ng-click="addTask(taskModel)">Add Task</button>
+
+		</div>
+	</form>
+
+</div>
